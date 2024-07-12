@@ -33,7 +33,7 @@ class TwitterClient(object):
         try:
             for tweet in tweepy.Cursor(self.api.user_timeline, screen_name=username).items(count):
                 tweets.append(tweet.text)
-        except tweepy.TweepError as e:
+        except tweepy.errors.Forbidden as e:
             print(f"Error: {e}")
         return tweets
 
@@ -61,6 +61,7 @@ for tweet, score in zip(tweets, sentiment_scores):
     print(f"Tweet: {tweet}")
     print(f"Sentiment Score: {score}")
     print("---")
+
 
 
 
